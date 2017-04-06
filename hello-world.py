@@ -4,6 +4,7 @@ from sklearn import tree
 # smooth = 1
 # bumpy = 0
 features = [[140, 1], [130, 1], [150, 0], [170, 0]]
+texture_names = ['bumpy', 'smooth']
 
 # apple = 0
 # orange = 1
