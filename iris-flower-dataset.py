@@ -22,12 +22,14 @@ clf.fit(train_data, train_target)
 predicted = iris.target_names[clf.predict(test_data)]
 answer = iris.target_names[iris.target[test_idx]]
 
+# print prediction
 print 'Predicted : ' + \
       str(predicted)
 
 print 'Answer : ' + \
       str(answer)
 
+# check prediction
 if np.array_equal(predicted, answer):
     print 'Prediction was correct!'
 else:
