@@ -16,5 +16,3 @@ def get_log(file_name):
             first_line = False
 
     return log
-
-get_log()
