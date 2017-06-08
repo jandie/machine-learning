@@ -78,7 +78,7 @@ Y = np.asarray(y_list)
 print (positive_count)
 print (negative_count)
 
-h = 4  # step size in the mesh
+h = 3  # step size in the mesh
 datasets = 3  # amount of datasets
 
 x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
