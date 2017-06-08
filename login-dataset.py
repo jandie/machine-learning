@@ -1,22 +1,22 @@
 print(__doc__)
 
-import numpy as np
+from random import randint
+
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.colors import ListedColormap
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.datasets import make_moons, make_circles, make_classification
-from sklearn.neural_network import MLPClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
+from sklearn.datasets import make_classification
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.gaussian_process import GaussianProcessClassifier
 from sklearn.gaussian_process.kernels import RBF
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.naive_bayes import GaussianNB
-from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neural_network import MLPClassifier
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+
 import logParser
-from random import randint
 
 log_train = logParser.get_log("generated-log-train.csv")
 log_test = logParser.get_log("generated-log-test.csv")
@@ -44,8 +44,8 @@ for entry in log_train:
 X_train = np.asarray(train_data)
 y_train = np.asarray(train_target)
 
-print positive_count
-print negative_count
+print (positive_count)
+print (negative_count)
 
 positive_count = 0
 negative_count = 0
@@ -75,8 +75,8 @@ y_list.extend(y_train)
 y_list.extend(y_test)
 Y = np.asarray(y_list)
 
-print positive_count
-print negative_count
+print (positive_count)
+print (negative_count)
 
 h = 4  # step size in the mesh
 datasets = 3  # amount of datasets
@@ -131,7 +131,12 @@ i += 1
 for name, clf in zip(names, classifiers):
     ax = plt.subplot(datasets, len(classifiers) + 1, i)
     clf.fit(X_train, y_train)
-    score = clf.score(X_test, y_test)
+
+    result = clf.predict(X_test)
+
+    from sklearn.metrics import accuracy_score
+
+    score = round(accuracy_score(result, y_test), 4)
 
     # Plot the decision boundary. For that, we will assign a color to each
     # point in the mesh [x_min, x_max]x[y_min, y_max].
@@ -158,7 +163,7 @@ for name, clf in zip(names, classifiers):
     ax.set_yticks(())
 
     ax.set_title(name)
-    ax.text(xx.max() - .3, yy.min() + .3, ('%.2f' % score).lstrip('0'),
+    ax.text(xx.max() - .3, yy.min() + .3, score,
             size=15, horizontalalignment='right')
     i += 1
 
